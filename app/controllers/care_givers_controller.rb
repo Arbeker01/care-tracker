@@ -1,8 +1,10 @@
 class CareGiversController < ApplicationController
 
 get '/login'  do
-  erb :login
+  erb :'care_givers/login'
 end
+
+
 
 post '/login' do
 
@@ -13,6 +15,7 @@ get '/signup' do
   erb :'care_givers/create_care_giver'
 
 end
+
 
 
 
