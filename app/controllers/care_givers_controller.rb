@@ -7,7 +7,9 @@ end
 
 
 post '/login' do
-
+	 @care_giver = CareGiver.find_by(:username => params[:username]
+	 session[:care_giver_id] = @care_giver.id
+	 redirect 'daily_activities/all_daily_activities'
 end
 
 
@@ -17,7 +19,22 @@ get '/signup' do
 end
 
 
+post '/signup'
+  @care_giver = CareGiver.new(:username => params[:username], :email => params[:email], :password => params[:password])
+  @care_giver.save
+    session[:care_giver_id] = @care_giver.id
+    redirect 'daily_activities/all_daily_activities'
+end
 
+get '/care_givers/:id' do
+     @care_giver = CareGiver.find_by(id: params[:id])
+     erb :'care_givers/show'
+end
+
+get '/logout' do 
+  session.clear
+  redirect "/care_givers/login"
+end
 
 
 
