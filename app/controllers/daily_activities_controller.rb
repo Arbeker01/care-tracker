@@ -1,4 +1,4 @@
-class DailyActivitesController < ApplicationController
+class DailyActivitiesController < ApplicationController
 
 get '/daily_activities'  do
 	@daily_activities = DailyActivity.all 
