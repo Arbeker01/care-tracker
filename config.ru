@@ -6,5 +6,6 @@ end
 
 use Rack::MethodOverride
 use CareGiversController
+use DailyActivitiesController
 
 run ApplicationController
