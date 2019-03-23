@@ -13,25 +13,25 @@ class ApplicationController < Sinatra::Base
     erb :'welcome'
   end
 
-  # helpers do
-   #  def logged_in?
-   #  !!current_user
-    # end
+  helpers do
+     def logged_in?
+     !!current_user
+     end
 
-    # def current_user
-     # @current_user ||= CareGiver.find_by(id: session[:care_giver_id]) if session[:care_giver_id]
-     #end
-   #end
+     def current_user
+      @current_user ||= CareGiver.find_by(id: session[:care_giver_id]) if session[:care_giver_id]
+     end
+    end
 
-  #def authorized_to_edit?(daily_activity)
-   # daily_activity.care_giver == current_user
-  #end
+  def authorized_to_edit?(daily_activity)
+    daily_activity.care_giver == current_user
+  end
 
-  #def redirect_if_not_logged_in
-   # if !logged_in?
-    #  redirect '/'
-   # end
-  #end
+  def redirect_if_not_logged_in
+    if !logged_in?
+      redirect '/'
+    end
+  end
 
 
 end
