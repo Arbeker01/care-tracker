@@ -32,7 +32,7 @@ class CareGiversController < ApplicationController
     @care_giver = CareGiver.find_by(:name => params[:name])
      if @care_giver && @care_giver.authenticate(params[:password])
         session[:care_giver_id] = @care_giver.id
-         redirect 'daily_activities/all_daily_activities'
+         erb :'care_givers/show'
      else
          redirect 'care_givers/login'
      end
@@ -46,7 +46,7 @@ class CareGiversController < ApplicationController
   get '/logout' do 
     if logged_in?
       session.clear
-      redirect 'care_givers/login'
+      redirect '/login'
     else
       redirect '/'
     end
