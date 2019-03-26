@@ -1,0 +1,14 @@
+<h2> Edit Your Entry </h2>
+
+<form  action="/daily_activities/<%= @daily_activity.id %>" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="location">Location</label>
+    <input type="text" name="location" value="">
+  <label for="description">Description:</label>
+    <textarea name="description" style="width:auto; height:auto;"><%= @daily_activity.description %></textarea>
+  <label for="books">Books</label>
+    <input type="text" name="books" value="">
+  <label for="medication">Medication</label>
+    <input type="text" name="medication" value="">
+  <input type="submit" value="submit">
+</form>

@@ -26,5 +26,10 @@ class ApplicationController < Sinatra::Base
 
   def authorized_to_edit?(daily_activity)
     daily_activity.care_giver == current_user
+    end
+
+  def set_daily_activity
+    @daily_activity = DailyActivity.find_by_id[:id]
   end
+
 end

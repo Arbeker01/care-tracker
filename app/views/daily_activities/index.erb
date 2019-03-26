@@ -1,0 +1,14 @@
+<p>Welcome, <%=current_user.name %></p>
+<h2> Here's a list of all activities</h2>
+
+
+<% @daily_activities.each do |daily_activity| %>
+  <div>
+    <h4><a href="/daily_activities/<%= daily_activity.id %>">See more</a>
+    <%= daily_activity.description %>
+    <%= daily_activity.location %>
+    <%= daily_activity.books %>
+    <%= daily_activity.medications %>
+    <p> entered by: <%= daily_activity.care_giver.name %></p>
+  </div>
+<% end %>

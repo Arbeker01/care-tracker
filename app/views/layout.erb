@@ -1,24 +1,14 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-
-    <title>CareTracker</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="/stylesheets/main.css" />
-  </head>
-  <body>
-    <div class="nav">
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div class="nav">
     <% if logged_in? %>
       <a href="/daily_activities/new"><h4>What Happened Today?</h4></a>
       <a href="/logout"><h4>Log Out</h4></a>
-      <a href="/daily_activities/all_daily_activities"><h4>All Activities</h4></a>
+      <a href="/daily_activities/index"><h4>All Activities</h4></a>
     <% end %>
     </div>
 
@@ -31,10 +21,6 @@
       </footer>
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <!--[if lt IE 7]>
-      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-    <![endif]-->
-  </body>
+</body>
 </html>
+  

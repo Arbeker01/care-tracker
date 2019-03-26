@@ -1,9 +1,9 @@
 class DailyActivitiesController < ApplicationController
 
 	get '/daily_activities'  do
-		@daily_activities = DailyActivity.all 
+		@care_giver.daily_activities = DailyActivity.all 
 		if logged_in?
-		erb :'daily_activities/all_daily_activities'
+		erb :'/daily_activities/index'
 	    else
 		redirect '/login'
 	    end
@@ -17,20 +17,6 @@ class DailyActivitiesController < ApplicationController
 	    end
 	end
 
-	
-
-	post '/daily_activities' do
-		if !logged_in?
-			redirect '/'
-		end
-		if params[:location] != "" && params[:description] != "" && params[:books] != "" && params[:medication] != ""
-		@daily_activity = DailyActivity.create(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication], care_giver_id: current_user.id)
-		    redirect '/daily_activities/all_daily_activities'
-	    else
-		    redirect '/daily_activities/new'
-	    end
-	end
-
 	get '/daily_activities/:id' do
 		if logged_in?
 		@daily_activity  = DailyActivity.find_by_id(params[:id])
@@ -40,16 +26,30 @@ class DailyActivitiesController < ApplicationController
 	    end
 	end
 
+	post '/daily_activities' do
+		if !logged_in?
+			redirect '/'
+		end
+		if params[:location] != "" && params[:description] != "" && params[:books] != "" && params[:medication] != ""
+		@daily_activity = DailyActivity.create(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication], care_giver_id: current_user.id)
+		    redirect '/daily_activities/#{@daily_activity.id}'
+	    else
+		    redirect '/daily_activities/new'
+	    end
+	end
+
+	
+
 	get '/daily_activities/:id/edit' do
-		@daily_activity = DailyActivity.find_by_id[:id]
+		set_daily_activity
 		if logged_in?
 			if authorized_to_edit?(@daily_activity)
 		      erb :'/daily_activities/edit'
 		    else
-	          redirect '/daily_activities/all_daily_activities'
+	          redirect '/daily_activities/index'
 	        end
 	    else
-	    	redirect '/care_givers/login'
+	    	redirect 'care_givers/login'
 	    end
 	end
 
@@ -66,7 +66,7 @@ class DailyActivitiesController < ApplicationController
 		              redirect '/daily_activities/#{@daily_activity.id}/edit'
 		            end
 		         else
-		         	redirect '/daily_activities/all_daily_activities'
+		         	redirect '/daily_activities/index'
 		         end
 		    end
 		else
@@ -80,9 +80,12 @@ class DailyActivitiesController < ApplicationController
 		   if @daily_activity && daily_activity.care_giver == current_user
 		      @daily_activity.destroy	
 		   end
-		      redirect '/daily_activities/all_daily_activities'
+		      redirect '/daily_activities/index'
 		else
 		  redirect '/care_givers/login'
 		end
 	end
+
+	
+	
 end
