@@ -14,7 +14,7 @@ class CareGiversController < ApplicationController
       if params[:name] != "" && params[:email] != "" && params[:password] != ""
          @care_giver.save
          session[:care_giver_id] = @care_giver.id
-           redirect '/login'
+           erb :'/daily_activities/index'
       else
            redirect '/signup'
       end
@@ -22,7 +22,7 @@ class CareGiversController < ApplicationController
 
   get '/login'  do
     if logged_in?
-      redirect 'daily_activities/index'
+      redirect '/daily_activities/index'
     else 
       erb :'/care_givers/login'
     end
@@ -32,9 +32,9 @@ class CareGiversController < ApplicationController
     @care_giver = CareGiver.find_by(:name => params[:name])
      if @care_giver && @care_giver.authenticate(params[:password])
         session[:care_giver_id] = @care_giver.id
-         redirect 'daily_activities/index'
+         redirect '/daily_activities'
      else
-         redirect 'care_givers/login'
+         redirect '/login'
      end
   end
 

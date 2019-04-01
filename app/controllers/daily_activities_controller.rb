@@ -1,7 +1,8 @@
 class DailyActivitiesController < ApplicationController
 
 	get '/daily_activities'  do
-		@care_giver.daily_activities = DailyActivity.all 
+		 
+		@daily_activities = current_user.daily_activities.all 
 		if logged_in?
 		erb :'/daily_activities/index'
 	    else
