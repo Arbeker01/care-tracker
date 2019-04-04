@@ -29,7 +29,7 @@ class ApplicationController < Sinatra::Base
     end
 
   def set_daily_activity
-    @daily_activity = DailyActivity.find_by_id[:id]
+    @daily_activity = DailyActivity.find_by(id: params[:id])
   end
 
 end

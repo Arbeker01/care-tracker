@@ -9,6 +9,10 @@
     <%= daily_activity.location %>
     <%= daily_activity.books %>
     <%= daily_activity.medication %>
-    <p> entered by: <%= daily_activity.care_giver.name %></p>
+    <p> entered by: 
+    	<% if daily_activity.care_giver %>
+    		<%= daily_activity.care_giver.name %>
+    	<%end %>
+    </p>
   </div>
 <% end %>

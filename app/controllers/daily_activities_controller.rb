@@ -2,7 +2,7 @@ class DailyActivitiesController < ApplicationController
 
 	get '/daily_activities'  do
 		 
-		@daily_activities = current_user.daily_activities.all 
+		@daily_activities = DailyActivity.all 
 		if logged_in?
 		erb :'/daily_activities/index'
 	    else
@@ -20,7 +20,7 @@ class DailyActivitiesController < ApplicationController
 
 	get '/daily_activities/:id' do
 		if logged_in?
-		@daily_activity  = DailyActivity.find_by_id(params[:id])
+		@daily_activity  = DailyActivity.find_by(id: params[:id])
 		erb :'/daily_activities/show'
 	    else
 		redirect '/login'
@@ -56,11 +56,11 @@ class DailyActivitiesController < ApplicationController
 
 	patch '/daily_activities/:id' do
 		if logged_in?
-			if params[:location] == "" && params[:description] == ""
+			if params[:location] == "" && params[:description] == "" && params[:books] == "" && params[:medication] == ""
 				redirect '/daily_activities/#{params[:id]}/edit'
 			else
-	           @daily_activity = DailyActivity.find_by_id(params[:id])
-	             if @daily_activity && daily_activity.care_giver == current_user
+	           @daily_activity = DailyActivity.find_by(id: params[:id])
+	             if @daily_activity && @daily_activity.care_giver == current_user
 	             	if @daily_activity.update(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication])
 		              redirect '/daily_activities/#{@daily_activity.id}'
 		            else
@@ -77,8 +77,8 @@ class DailyActivitiesController < ApplicationController
 
 	delete '/daily_activities/:id' do
 		if logged_in?
-		  @daily_activity = DailyActivity.find_by_id(params[:id])
-		   if @daily_activity && daily_activity.care_giver == current_user
+		  @daily_activity = DailyActivity.find_by(id: params[:id])
+		   if @daily_activity && @daily_activity.care_giver == current_user
 		      @daily_activity.destroy	
 		   end
 		      redirect '/daily_activities/index'
