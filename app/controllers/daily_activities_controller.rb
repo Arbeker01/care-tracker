@@ -3,7 +3,7 @@ class DailyActivitiesController < ApplicationController
 	get '/daily_activities'  do
 		  
 		if logged_in?
-		  @daily_activities = DailyActivity.all
+		  @daily_activities = DailyActivity.all  #daily activities not persisting from this point
 		    erb :'/daily_activities/index'
 	    else
 		   redirect '/signup'
@@ -33,7 +33,7 @@ class DailyActivitiesController < ApplicationController
 		end
 		if params[:location] != "" && params[:description] != "" && params[:books] != "" && params[:medication] != ""
 		@daily_activity = DailyActivity.create(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication], care_giver_id: current_user.id)
-		    redirect '/daily_activities/index'
+		   redirect '/daily_activities/index'
 	    else
 		    erb :'/daily_activities/new'
 	    end

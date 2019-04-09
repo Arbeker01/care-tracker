@@ -10,13 +10,12 @@ class CareGiversController < ApplicationController
 
 
   post '/signup' do
-    @care_giver = CareGiver.new(:name => params[:name], :email => params[:email], :password => params[:password])
+    @care_giver = CareGiver.create(name:  params[:name], email: params[:email], password: params[:password])
       if params[:name] != "" && params[:email] != "" && params[:password] != ""
-         @care_giver.save
          session[:care_giver_id] = @care_giver.id
            redirect '/daily_activities/index'
       else
-           redirect '/signup'
+           edirect '/signup'
       end
   end
 
