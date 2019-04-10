@@ -33,7 +33,7 @@ class DailyActivitiesController < ApplicationController
 		end
 		if params[:location] != "" && params[:description] != "" && params[:books] != "" && params[:medication] != ""
 		@daily_activity = DailyActivity.create(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication], care_giver_id: current_user.id)
-		   redirect '/daily_activities/index'
+		   redirect '/daily_activities'
 	    else
 		    erb :'/daily_activities/new'
 	    end
@@ -47,7 +47,7 @@ class DailyActivitiesController < ApplicationController
 			if authorized_to_edit?(@daily_activity)
 		      erb :'/daily_activities/edit'
 		    else
-	          redirect '/daily_activities/index'
+	          redirect '/daily_activities'
 	        end
 	    else
 	    	redirect '/login'
@@ -57,14 +57,14 @@ class DailyActivitiesController < ApplicationController
 	patch '/daily_activities/:id' do
 		if logged_in?
 			if params[:location] == "" && params[:description] == "" && params[:books] == "" && params[:medication] == ""
-				redirect '/daily_activities/#{params[:id]}/edit'
+				erb  :'/daily_activities/#{params[:id]}/edit'
 			else
 	           @daily_activity = DailyActivity.find_by(id: params[:id])
 	             if @daily_activity && @daily_activity.care_giver == current_user
 	             	if @daily_activity.update(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication])
-		              redirect '/daily_activities/index'
+		              redirect '/daily_activities'
 		            else
-		              redirect '/daily_activities/#{@daily_activity.id}/edit'
+		              erb :'/daily_activities/#{@daily_activity.id}/edit'
 		            end
 		         else
 		         	redirect '/signup'
@@ -81,7 +81,7 @@ class DailyActivitiesController < ApplicationController
 		   if @daily_activity && @daily_activity.care_giver == current_user
 		      @daily_activity.destroy	
 		   end
-		      redirect '/daily_activities/index'
+		      redirect '/daily_activities'
 		else
 		  redirect '/login'
 		end
