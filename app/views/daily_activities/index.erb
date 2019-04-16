@@ -2,17 +2,18 @@
 <h2> Here's a list of all activities</h2>
 
 
- <% @daily_activities.each do |daily_activity| %>
  
-    <h4><a href="/daily_activities/<%= daily_activity.id %>">See more</a>
-    <%= daily_activity.description %>
-    <%= daily_activity.location %>
-    <%= daily_activity.books %>
-    <%= daily_activity.medication %>
-    <p> entered by: 
+ <% @daily_activities.each do |daily_activity| %>
+  <div style="border: 1px solid black;">
+    <p>Description: <%= daily_activity.description %></p>
+    <p>Location: <%= daily_activity.location %></p>
+    <p>Name of Book(s): <%= daily_activity.books %></p>
+    <p>Name of Medication: <%= daily_activity.medication %></p>
+    <p> Entered by: 
     	<% if daily_activity.care_giver %>
     		<%= daily_activity.care_giver.name %>
     	<%end %>
     </p>
-
+    <h4><a href="/daily_activities/<%= daily_activity.id %>">See more</a></h4>
+ </div>
 <% end %>
