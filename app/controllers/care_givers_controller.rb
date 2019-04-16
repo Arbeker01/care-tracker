@@ -28,7 +28,7 @@ class CareGiversController < ApplicationController
   end
   
   post '/login' do
-    @care_giver = CareGiver.find_by(:name => params[:name])
+    @care_giver = CareGiver.find_by(:email => params[:email])
      if @care_giver && @care_giver.authenticate(params[:password])
         session[:care_giver_id] = @care_giver.id
          redirect '/daily_activities'

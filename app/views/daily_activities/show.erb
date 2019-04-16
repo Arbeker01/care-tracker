@@ -1,15 +1,17 @@
 
-<p><%= @daily_activity.description %></p>
-<p><%= @daily_activity.location %></p>
-<p><%= @daily_activity.books %></p>
-<p><%= @daily_activity.medication %></p>
+<p><strong>Description:</strong> <%= @daily_activity.description %></p>
+<p><strong>Location:</strong> <%= @daily_activity.location %></p>
+<p><strong>Books Read:</strong> <%= @daily_activity.books %></p>
+<p><strong>Medication:</strong> <%= @daily_activity.medication %></p>
 
 <% if authorized_to_edit?(@daily_activity) %>
 <a href="/daily_activities/<%= @daily_activity.id %>/edit">Edit Entry</a>
 <br><br>
-<form action="/daily_activities/<%= @daily_activity.id %>" method="POST">
+
+	<form action="/daily_activities/<%= @daily_activity.id %>" method="POST">
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit"   value="Delete Tweet">
+  <input type="submit"  value="Delete Tweet">
 </form>
+
 
 <% end %>

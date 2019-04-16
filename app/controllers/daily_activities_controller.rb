@@ -3,7 +3,7 @@ class DailyActivitiesController < ApplicationController
 	get '/daily_activities'  do
 		  
 		if logged_in?
-		  @daily_activities = DailyActivity.all  #daily activities not persisting from this point
+		  @daily_activities = DailyActivity.all 
 		    erb :'/daily_activities/index'
 	    else
 		   redirect '/signup'

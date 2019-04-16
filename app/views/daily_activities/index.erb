@@ -1,15 +1,15 @@
-<p> Welcome, <%=current_user.name %> </p>
+<div class="name"><p> Welcome, <strong><%=current_user.name %></strong> </p></div>
 <h2> Here's a list of all activities</h2>
 
 
  
  <% @daily_activities.each do |daily_activity| %>
-  <div style="border: 1px solid black;">
-    <p>Description: <%= daily_activity.description %></p>
-    <p>Location: <%= daily_activity.location %></p>
-    <p>Name of Book(s): <%= daily_activity.books %></p>
-    <p>Name of Medication: <%= daily_activity.medication %></p>
-    <p> Entered by: 
+  <div class="middle">
+    <p><strong>Description:</strong> <%= daily_activity.description %></p>
+    <p><strong>Location:</strong> <%= daily_activity.location %></p>
+    <p><strong>Name of Book(s):</strong> <%= daily_activity.books %></p>
+    <p><strong>Name of Medication:</strong> <%= daily_activity.medication %></p>
+    <p> <strong>Entered by:</strong> 
     	<% if daily_activity.care_giver %>
     		<%= daily_activity.care_giver.name %>
     	<%end %>
