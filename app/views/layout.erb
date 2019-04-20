@@ -10,7 +10,7 @@
     color: red;
    }
    a:clicked {
-    colr: green;
+    color: orange;
    }
 .middle {
   background-color:rgb(196, 255, 201);
@@ -46,7 +46,7 @@ body {
   margin: 0, auto;
 }
 .nav a {
-  text-decoration: none; 
+  text-decoration: underline; 
 }
 .nav ul li {
   list-style: none;
@@ -72,7 +72,7 @@ html {
   <div class="nav">
      <ul>
     <% if logged_in? %>
-      <li><a href="/daily_activities/new">What Happened Today?</a></li>
+      <li><a href="/daily_activities/new">Enter a New Activity</a></li>
       <li><a href="/logout">Log Out</a></li>
       <li><a href="/daily_activities">All Activities</a></li>
     <% end %>

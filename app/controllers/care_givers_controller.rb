@@ -7,13 +7,18 @@ class CareGiversController < ApplicationController
        redirect '/daily_activities'
     end
   end
-
+  
+  get '/care_givers' do
+    erb :'/care_givers/show'
+  end
 
   post '/signup' do
-    @care_giver = CareGiver.create(:name => params[:name], :email => params[:email], :password  => params[:password])
+
+    @care_giver = CareGiver.create(name: params[:name], email:  params[:email], password:  params[:password])
       if params[:name] != "" && params[:email] != "" && params[:password] != ""
          session[:care_giver_id] = @care_giver.id
-         
+
+         flash[:message] = "You have sucessfully signed up"
           redirect '/daily_activities'
       else
         redirect '/signup'
