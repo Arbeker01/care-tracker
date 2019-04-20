@@ -32,9 +32,11 @@ class DailyActivitiesController < ApplicationController
 			redirect '/'
 		end
 		if params[:location] != "" && params[:description] != "" && params[:books] != "" && params[:medication] != ""
+			flash[:message] = "Successful daily activity entry"
 		@daily_activity = DailyActivity.create(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication], care_giver_id: current_user.id)
 		   redirect '/daily_activities'
 	    else
+	    	flash[:errors] = "Please enter a daily activity"
 		    erb :'/daily_activities/new'
 	    end
 	end

@@ -10,10 +10,11 @@ class CareGiversController < ApplicationController
 
 
   post '/signup' do
-    @care_giver = CareGiver.create(name:  params[:name], email: params[:email], password: params[:password])
+    @care_giver = CareGiver.create(:name => params[:name], :email => params[:email], :password  => params[:password])
       if params[:name] != "" && params[:email] != "" && params[:password] != ""
          session[:care_giver_id] = @care_giver.id
-           redirect '/daily_activities'
+         
+          redirect '/daily_activities'
       else
         redirect '/signup'
       end
@@ -33,7 +34,8 @@ class CareGiversController < ApplicationController
         session[:care_giver_id] = @care_giver.id
          redirect '/daily_activities'
      else
-         redirect '/signup'
+       flash[:errors] = "Please enter the required credentials."
+         redirect '/login'
      end
   end
 

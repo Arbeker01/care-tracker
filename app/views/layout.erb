@@ -45,7 +45,22 @@ body {
   padding: 2.5%;
   margin: 0, auto;
 }
-
+.nav a {
+  text-decoration: none; 
+}
+.nav ul li {
+  list-style: none;
+  display: inline;
+  padding-right: 100px;
+}
+.wav a {
+  text-decoration: none; 
+}
+.wav ul li {
+  list-style: none;
+  display: inline;
+  padding-right: 100px;
+}
 
 html {
   background-color: black;
@@ -55,15 +70,23 @@ html {
 </head>
 <body>
   <div class="nav">
+     <ul>
     <% if logged_in? %>
-      <a href="/daily_activities/new"><h4>What Happened Today?</h4></a>
-      <a href="/logout"><h4>Log Out</h4></a>
-      <a href="/daily_activities"><h4>All Activities</h4></a>
+      <li><a href="/daily_activities/new">What Happened Today?</a></li>
+      <li><a href="/logout">Log Out</a></li>
+      <li><a href="/daily_activities">All Activities</a></li>
     <% end %>
+     </ul>
     </div>
+  
+   <%if flash[:message] %>
+     <h4 style="color: green;"><%= flash[:message] %></h4>
+     <% end %>
+     <%if flash[:errors] %>
+     <h4 style="color: red;"><%= flash[:errors] %></h4>
+     <% end %>
 
     <div class="wrapper">
-
 
         <%= yield %>
 
