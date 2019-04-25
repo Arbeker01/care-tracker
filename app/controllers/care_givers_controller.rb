@@ -14,8 +14,8 @@ class CareGiversController < ApplicationController
 
   post '/signup' do
 
-    @care_giver = CareGiver.create(name: params[:name], email:  params[:email], password:  params[:password])
-      if params[:name] != "" && params[:email] != "" && params[:password] != ""
+    @care_giver = CareGiver.create(name: params[:name], email:  params[:email], password:  params[:password]) 
+      if params[:name] != "" && params[:email] != "" && params[:password] != "" && @care_giver.is_valid?
          session[:care_giver_id] = @care_giver.id
 
          flash[:message] = "You have sucessfully signed up"
