@@ -62,8 +62,8 @@ class DailyActivitiesController < ApplicationController
 			if params[:location] == "" && params[:description] == "" && params[:books] == "" && params[:medication] == ""
 				erb  :'/daily_activities/#{params[:id]}/edit'
 			else
-	           @daily_activity = DailyActivity.find_by(id: params[:id])
-	             if @daily_activity && @daily_activity.care_giver == current_user
+	           set_daily_activity
+	             	if @daily_activity && authorized_to_edit?(@daily_activity)
 	             	if @daily_activity.update(location: params[:location], description: params[:description], books: params[:books], medication: params[:medication])
 	             flash[:message] = "Daily activity successfully updated."
 		              redirect '/daily_activities'
@@ -82,11 +82,12 @@ class DailyActivitiesController < ApplicationController
 
 	delete '/daily_activities/:id' do
 		if logged_in?
-		  @daily_activity = DailyActivity.find_by(id: params[:id])
-		   if @daily_activity && @daily_activity.care_giver == current_user
+		  set_daily_activity
+		   if @daily_activity && authorized_to_edit?(@daily_activity)
 		      @daily_activity.destroy	
+		      flash[:message] = "Daily Activity successfully deleted."
 		   end
-		   flash[:message] = "Daily Activity successfully deleted."
+		   
 		      redirect '/daily_activities'
 		else
 		  redirect '/login'
